@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { borrowBook, returnBook } = require('../controllers/borrowController');
-const { authMiddleware } = require('../middlewares/authMiddleware');
+const { authMiddleware } = require('../middleware/auth');
 
 router.post('/', authMiddleware, borrowBook);
 router.put('/:id', authMiddleware, returnBook);

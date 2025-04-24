@@ -10,7 +10,7 @@ const {
   addToInventory,
   removeFromInventory
 } = require('../controllers/libraryController');
-const { authMiddleware, roleMiddleware } = require('../middlewares/authMiddleware');
+const { authMiddleware, roleMiddleware } = require('../middleware/auth');
 
 router.get('/', authMiddleware, getAllLibraries);
 router.get('/:id', authMiddleware, getLibraryById);
