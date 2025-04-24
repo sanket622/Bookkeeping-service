@@ -10,6 +10,7 @@ const path = require('path');
 
 // App Init
 const app = express();
+const PORT = process.env.PORT || 8080;
 
 // Multilingual Setup (i18n)
 i18next
@@ -48,6 +49,9 @@ app.use('/api/books', bookRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/libraries', libraryRoutes);
 app.use('/api/borrow', borrowRoutes);
+app.get("/", (req, res) => {
+  res.send("Welcome to BookKeeping-service");
+});
 
 // Firebase image route (optional if you have it)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -63,11 +67,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: req.t('server_error'), error: err.message });
 });
 
-app.get("/",(req,res)=>{
-res.send('Welcome to BookKeeping Service')
-})
-// Server Init
-const PORT = process.env.PORT || 8080;
+
 app.listen(PORT, () => {
   console.log(`🚀 Server is running at http://localhost:${PORT}`);
 });
