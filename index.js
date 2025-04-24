@@ -63,7 +63,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: req.t('server_error'), error: err.message });
 });
 
-app.get((req,res)=>{
+app.get("/",(req,res)=>{
 res.send('Welcome to BookKeeping Service')
 })
 // Server Init
