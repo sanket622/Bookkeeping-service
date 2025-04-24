@@ -50,7 +50,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/libraries', libraryRoutes);
 app.use('/api/borrow', borrowRoutes);
 app.get("/", (req, res) => {
-  res.send("Welcome to BookKeeping-service");
+  res.send("Welcome to BookKeeping-service, this is my base_url");
 });
 
 // Firebase image route (optional if you have it)
