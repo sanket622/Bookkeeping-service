@@ -27,9 +27,9 @@ router.post(
 );
 
 // PUT update book
-router.put('/:id', authMiddleware, roleMiddleware(['author']), updateBook);
+router.put('/:id', authMiddleware, roleMiddleware(['Author']), updateBook);
 
 // DELETE remove book
-router.delete('/:id', authMiddleware, roleMiddleware(['author']), deleteBook);
+router.delete('/:id', authMiddleware, roleMiddleware(['Author']), deleteBook);
 
 module.exports = router;

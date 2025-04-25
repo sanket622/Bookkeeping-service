@@ -14,9 +14,6 @@ exports.borrowBook = async (req, res) => {
       return res.status(400).json({ message: req.t('book_already_borrowed') });
     }
 
-    // Optional: Handle charges here (e.g., payment gateway or static fee)
-    // e.g., deduct tokens or update user's balance
-
     book.borrower = userId;
     await book.save();
 

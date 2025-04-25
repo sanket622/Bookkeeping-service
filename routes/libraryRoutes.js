@@ -14,13 +14,13 @@ const { authMiddleware, roleMiddleware } = require('../middleware/auth');
 
 router.get('/', authMiddleware, getAllLibraries);
 router.get('/:id', authMiddleware, getLibraryById);
-router.post('/', authMiddleware, roleMiddleware(['admin']), createLibrary);
-router.put('/:id', authMiddleware, roleMiddleware(['admin']), updateLibrary);
-router.delete('/:id', authMiddleware, roleMiddleware(['admin']), deleteLibrary);
+router.post('/', authMiddleware, roleMiddleware(['Admin']), createLibrary);
+router.put('/:id', authMiddleware, roleMiddleware(['Admin']), updateLibrary);
+router.delete('/:id', authMiddleware, roleMiddleware(['Admin']), deleteLibrary);
 
 // Inventory routes
 router.get('/:id/inventory', authMiddleware, getInventory);
-router.post('/:id/inventory', authMiddleware, roleMiddleware(['admin']), addToInventory);
-router.delete('/:id/inventory/:bookId', authMiddleware, roleMiddleware(['admin']), removeFromInventory);
+router.post('/:id/inventory', authMiddleware, roleMiddleware(['Admin']), addToInventory);
+router.delete('/:id/inventory/:bookId', authMiddleware, roleMiddleware(['Admin','Author']), removeFromInventory);
 
 module.exports = router;

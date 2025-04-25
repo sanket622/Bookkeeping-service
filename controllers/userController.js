@@ -16,27 +16,21 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    // Check if client already has a valid token
-    const authHeader = req.header('Authorization');
-    if (authHeader && authHeader.startsWith('Bearer ')) {
-      const token = authHeader.split(' ')[1];
-      try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        return res.json({ token }); // Return the same token if it's still valid
-      } catch {
-        // Token is invalid or expired – continue with login process
-      }
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: req.t('user_not_found') });
     }
 
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: req.t('user_not_found') });
-
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: req.t('invalid_credentials') });
+    if (!isMatch) {
+      return res.status(400).json({ message: req.t('invalid_credentials') });
+    }
 
     // Generate new token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+
     res.json({ token });
   } catch (error) {
     res.status(500).json({ message: req.t('login_failed'), error });

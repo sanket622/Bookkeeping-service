@@ -48,7 +48,7 @@ const borrowRoutes = require('./routes/borrowRoutes');
 app.use('/api/books', bookRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/libraries', libraryRoutes);
-app.use('/api/borrow', borrowRoutes);
+app.use('/api', borrowRoutes);
 app.get("/", (req, res) => {
   res.send("Welcome to BookKeeping-service, this is my base_url");
 });
